@@ -23,6 +23,26 @@ VALIDATE(){
 
 echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
+# Install Docker
+dnf list installed docker &>>$LOG_FILE_NAME
+if [ $? -ne 0 ]; then
+    dnf install docker -y &>>$LOG_FILE_NAME
+    VALIDATE $? "Installing Docker"
+    systemctl enable docker &>>$LOG_FILE_NAME
+    systemctl start docker &>>$LOG_FILE_NAME
+else
+    echo -e "Docker is already ... $Y Installed $N" | tee -a $LOG_FILE_NAME
+fi
+
+# Install Ansible
+dnf list installed ansible &>>$LOG_FILE_NAME
+if [ $? -ne 0 ]; then
+    dnf install ansible -y &>>$LOG_FILE_NAME
+    VALIDATE $? "Installing Ansible"
+else
+    echo -e "Ansible is already ... $Y Installed $N" | tee -a $LOG_FILE_NAME
+fi
+
 if [ $USERID -ne 0 ]; then
 	echo "ERROR:: You must have sudo access to execute this script" | tee -a $LOG_FILE_NAME
 	exit 1
