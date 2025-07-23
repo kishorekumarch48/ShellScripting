@@ -149,3 +149,64 @@ RED RED RED RED
 RED RED
 RED RED
 RED
+
+------------------------------------------------------------------------------------------------------------
+1)Replace word only in lines matching a pattern:
+
+cat linux
+
+This is a Linux server.
+Linux is powerful.
+This server is not Linux.
+Linux server and database.
+In Linux server is having different RHEL 6, 7, 8 and 9 Servers avialble.
+
+
+sed '/Linux/s/server/system/' linux
+
+This is a Linux system.
+Linux is powerful.
+This system is not Linux.
+Linux system and database.
+In Linux system is having different RHEL 6, 7, 8 and 9 Servers avialble.
+
+
+2)Delete blank lines:
+
+cat linux
+
+This is a Linux server.
+
+Linux is powerful.
+
+This server is not Linux.
+
+Linux server and database.
+
+In Linux server is having different RHEL 6, 7, 8 and 9 Servers avialble.
+
+sed '/^$/d' linux
+
+This is a Linux server.
+Linux is powerful.
+This server is not Linux.
+Linux server and database.
+In Linux server is having different RHEL 6, 7, 8 and 9 Servers avialble.
+
+3)Replace only if line starts with "user="
+
+cat file
+
+user=kiran
+role=admin
+location=India
+user=teja
+
+sed '/^user=/s/user=.*/user=saiteja/' file
+
+user=saiteja
+role=admin
+location=India
+user=saiteja
+
+
