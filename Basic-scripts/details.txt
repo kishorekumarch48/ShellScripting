@@ -1,0 +1,11 @@
+# "," "=" -- delimiter(-d) Cut each line of file.csv, using = as the delimiter, and print the second field only.
+# ":" --
+# cut -d',' -f1 file.csv
+# cut -d':' -f1 /etc/passwd
+# cut -c1-5 filename.txt -- Get first 5 characters of each line:
+# cut -d',' -f1,3 file.csv -- Multiple fields: Extracts columns 1 and 3 from a CSV.
+# ps aux | cut -c1-10 --> Pipe with other commands: Shows only the first 10 characters of each line from the ps output.
+
+The cut command in Linux is used to extract specific sections from lines of text, 
+usually from files or output streams: It's especially useful for processing columns or fields.
+DETAILS_CUT_COMMAND=Here is the line we need to cut...

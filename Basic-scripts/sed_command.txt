@@ -1,0 +1,151 @@
+1. s – Substitute
+-------------------------------------------------------------------------------------------
+sed 's/old/new/' file     # Replace first occurrence of 'old' with 'new' on each line
+sed 's/old/new/g' file    # Replace all occurrences of 'old' with 'new' on each line
+sed 's/old/new/2' file    # Replace second occurrence of 'old' on each line
+
+
+cat sample.txt
+red red red red
+red red
+red red
+red
+                                                                                                                                                                                                                    ✓
+
+sed "s/red/blue/" sample.txt
+blue red red red
+blue red
+blue red
+blue
+                                                                                                                                                                                                                    ✓
+
+sed "s/red/blue/g" sample.txt
+blue blue blue blue
+blue blue
+blue blue
+blue
+                                                                                                                                                                                                                    ✓
+
+sed "s/red/blue/2" sample.txt
+red blue red red
+red blue
+red blue
+red
+
+
+2. d – Delete line
+---------------------------------------------------------------------------
+sed '2d' file             # Delete 2nd line
+sed '1,3d' file           # Delete lines from 1 to 3
+sed '/pattern/d' file     # Delete lines matching pattern
+
+sed '2d' sample.txt
+red red red red
+red red
+red
+
+sed '1,3d' sample.txt
+red
+
+sed '/red/d' sample.txt
+
+
+3. p – Print line
+------------------------------------------------------------------------------------
+sed -n '3p' file          # Print only the 3rd line
+sed -n '/pattern/p' file  # Print lines matching the pattern
+
+Use -n to suppress automatic printing.
+
+sed -n '3p' sample.txt
+red red
+
+
+sed -n '/red/p' sample.txt
+red red red red
+red red
+red red
+red
+
+
+4. a – Append after line
+---------------------------------------------------------------------------------------------
+sed '3a New Line Text' file     # Append text **after** line 3
+
+sed '3a New Line Text' sample.txt
+red red red red
+red red
+red red
+New Line Text
+red
+
+
+5. i – Insert before line
+---------------------------------------------------------------------------------------------
+sed '3i New Line Text' file     # Insert text **before** line 3
+
+sed '3i green' sample.txt
+red red red red
+red red
+green
+red red
+red
+
+
+6. c – Change line
+------------------------------------------------------------------------------------------------
+sed '4c This is the new line' file   # Replace line 4 completely
+
+sed '4c voilet' sample.txt
+red red red red
+red red
+red red
+voilet
+
+
+7. y – Translate characters (like tr)
+----------------------------------------------------------------------------------------------------
+sed 'y/abc/ABC/' file          # Translate a → A, b → B, c → C
+
+sed 'y/red/RED/' sample.txt
+RED RED RED RED
+RED RED
+RED RED
+RED
+
+
+8. = – Print line numbers
+---------------------------------------------------------------------------------------------------
+sed '=' file                   # Print line number before each line
+
+sed '=' sample.txt
+1
+red red red red
+2
+red red
+3
+red red
+4
+red
+
+
+9. q – Quit after line
+------------------------------------------------------------------------------------------------------
+sed '3q' file                  # Stop reading after 3 lines
+
+sed '3q' sample.txt
+red red red red
+red red
+red red
+
+10. -i – Edit file in-place
+----------------------------------------------------------------------------------------------------------
+sed -i 's/old/new/g' file      # Replace directly in the file
+
+sed -i 's/green/RED/g' sample.txt
+
+cat sample.txt
+RED RED RED RED
+RED RED
+RED RED
+RED
